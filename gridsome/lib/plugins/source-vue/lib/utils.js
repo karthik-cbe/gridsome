@@ -6,15 +6,15 @@ const compiler = require('vue-template-compiler')
 const { parse } = require('@vue/component-compiler-utils')
 
 exports.createPagePath = function (filePath) {
-  const path = filePath
-    .split('/')
+  const pathname = filePath
+    .split(path.sep)
     .slice(2)
     .filter(s => !/^[iI]ndex\.vue$/.test(s))
     .map(s => s.replace(/\.vue$/, ''))
     .map(s => slugify(s))
     .join('/')
 
-  return `/${path}`
+  return `/${pathname}`
 }
 
 exports.parseComponent = function (file) {

@@ -1,4 +1,5 @@
 const path = require('path')
+const upath = require('upath')
 const fs = require('fs-extra')
 const sharp = require('sharp')
 const crypto = require('crypto')
@@ -88,7 +89,7 @@ class ProcessQueue {
     }
 
     const createSrcPath = (srcWidth = maxImageWidth) => {
-      const relPath = path.relative(this.context, filePath)
+      const relPath = upath.relative(this.context, filePath)
       let filename = ''
 
       if (process.env.GRIDSOME_MODE === 'serve') {
@@ -100,7 +101,7 @@ class ProcessQueue {
         filename = `${name}-${srcWidth}.${urlHash}${ext}`
       }
 
-      return path.join(pathPrefix, assetsDir, 'static', filename)
+      return upath.join(pathPrefix, assetsDir, 'static', filename)
     }
 
     const sets = imageSizes.map(width => {

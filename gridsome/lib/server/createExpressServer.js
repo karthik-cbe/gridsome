@@ -1,4 +1,5 @@
 const path = require('path')
+const upath = require('upath')
 const express = require('express')
 const bodyParser = require('body-parser')
 const resolvePort = require('./resolvePort')
@@ -21,7 +22,7 @@ module.exports = async app => {
   )
 
   const assetsDir = path.relative(config.targetDir, config.assetsDir)
-  const route = path.join(config.pathPrefix, assetsDir, 'static', '*')
+  const route = upath.join(config.pathPrefix, assetsDir, 'static', '*')
   server.get(route, require('./middlewares/assets')(app))
 
   const createUrl = (endpoint, protocol = 'http') => {
